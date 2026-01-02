@@ -9,25 +9,35 @@
         :root { --primary-navy: #0d121d; --card-bg: #161c28; --gold-text: #d4af37; --input-bg: #1e2533; --border-color: #2d3748; }
         body { background-color: var(--primary-navy); color: white; font-family: sans-serif; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         .header { text-align: center; margin-top: 15px; }
-        .profile-img { width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--gold-text); margin: 0 auto 15px auto; background-image: url('https://upload.wikimedia.org/wikipedia/ar/c/c2/Muhammad_bin_Salih_al-Uthaymeen.jpg'); background-size: cover; background-position: center; }
+        .profile-img { width: 100px; height: 100px; border-radius: 50%; border: 2px solid var(--gold-text); margin: 0 auto 10px auto; background-image: url('https://upload.wikimedia.org/wikipedia/ar/c/c2/Muhammad_bin_Salih_al-Uthaymeen.jpg'); background-size: cover; background-position: center; }
         .ayah { color: var(--gold-text); font-weight: bold; margin: 25px 0; text-align: center; font-size: 1.1rem; }
         
-        /* تحسين خانة البحث */
-        .search-container { width: 100%; max-width: 400px; position: relative; }
-        input { width: 100%; background-color: var(--input-bg); border: 1px solid var(--border-color); padding: 16px; border-radius: 12px; color: white; text-align: right; font-size: 16px; outline: none; box-sizing: border-box; }
-        
-        /* مكان ظهور الإجابة */
+        /* تصميم خانة البحث مع زر الإرسال */
+        .search-wrapper {
+            width: 100%; max-width: 400px; display: flex; align-items: center;
+            background-color: var(--input-bg); border: 1px solid var(--border-color);
+            border-radius: 12px; overflow: hidden; padding: 5px;
+        }
+        input { 
+            flex: 1; background: transparent; border: none; padding: 12px; 
+            color: white; text-align: right; font-size: 16px; outline: none; 
+        }
+        .send-btn {
+            background-color: var(--gold-text); color: var(--primary-navy);
+            border: none; border-radius: 8px; width: 45px; height: 45px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: transform 0.2s;
+        }
+        .send-btn:active { transform: scale(0.9); }
+
         #response-area {
             width: 100%; max-width: 400px; background: var(--card-bg); border-radius: 12px; 
             margin-top: 20px; padding: 15px; display: none; border-right: 4px solid var(--gold-text);
-            line-height: 1.8; font-size: 15px; text-align: justify;
+            line-height: 1.8; font-size: 15px; text-align: justify; box-sizing: border-box;
         }
-
         .loading { color: var(--gold-text); font-style: italic; font-size: 13px; margin-top: 10px; display: none; }
-
         .donation-card { background-color: var(--card-bg); width: 100%; max-width: 400px; padding: 20px; border-radius: 15px; margin-top: 30px; text-align: center; border: 1px solid var(--border-color); box-sizing: border-box; }
         .pay-button { background-color: #ffc439; color: #003087; display: block; padding: 14px; border-radius: 10px; font-weight: bold; text-decoration: none; cursor: pointer; border: none; width: 100%; font-size: 18px; }
-        .footer { margin-top: auto; padding: 20px 0; color: #4a5568; font-size: 11px; text-align: center; }
     </style>
 </head>
 <body>
@@ -40,11 +50,14 @@
 
     <div class="ayah">"فَاسْأَلُوا أَهْلَ الذِّكْرِ إِن كُنتُمْ لَا تَعْلَمُونَ"</div>
 
-    <div class="search-container">
-        <input type="text" id="user-question" placeholder="اكتب سؤالك الشرعي هنا واضغط Enter..." onkeypress="handleSearch(event)">
-        <div id="loading-text" class="loading">جاري البحث في فتاوى الشيخ...</div>
+    <div class="search-wrapper">
+        <button class="send-btn" onclick="startSearch()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+        <input type="text" id="user-question" placeholder="اكتب سؤالك الشرعي هنا..." onkeypress="if(event.key==='Enter') startSearch()">
     </div>
-
+    
+    <div id="loading-text" class="loading">جاري البحث في فتاوى الشيخ...</div>
     <div id="response-area"></div>
 
     <div class="donation-card">
@@ -52,37 +65,26 @@
         <button class="pay-button" onclick="openPaypal()">Pay with PayPal</button>
     </div>
 
-    <div class="footer">تطوير وإشراف: عَبْدُ الفَتَّاحِ الشَّوابكة</div>
-
     <script>
         const tg = window.Telegram.WebApp;
         tg.expand();
 
-        async function handleSearch(event) {
-            if (event.key === 'Enter') {
-                const question = document.getElementById('user-question').value;
-                const responseArea = document.getElementById('response-area');
-                const loadingText = document.getElementById('loading-text');
+        async function startSearch() {
+            const question = document.getElementById('user-question').value;
+            const responseArea = document.getElementById('response-area');
+            const loadingText = document.getElementById('loading-text');
 
-                if (!question) return;
+            if (!question) return;
 
-                // إظهار وضع التحميل
-                loadingText.style.display = 'block';
-                responseArea.style.display = 'none';
+            loadingText.style.display = 'block';
+            responseArea.style.display = 'none';
 
-                try {
-                    // ملاحظة: هنا سنربط لاحقاً بـ API حقيقي
-                    // حالياً سأضع لك رد تجريبي احترافي يوضح لك كيف ستظهر النتيجة
-                    setTimeout(() => {
-                        loadingText.style.display = 'none';
-                        responseArea.style.display = 'block';
-                        responseArea.innerHTML = `<b>الإجابة:</b><br>بارك الله فيك، بناءً على منهج الشيخ ابن عثيمين رحمه الله: فإن الأصل في هذه المسألة هو الاتباع لا الابتداع، والدليل من الكتاب قول الله تعالى... (هنا ستظهر الإجابة الكاملة من الذكاء الاصطناعي).`;
-                    }, 2000);
-                    
-                } catch (error) {
-                    loadingText.innerText = "عذراً، حدث خطأ في الاتصال.";
-                }
-            }
+            // محاكاة البحث (سنربطها لاحقاً بذكاء اصطناعي حقيقي)
+            setTimeout(() => {
+                loadingText.style.display = 'none';
+                responseArea.style.display = 'block';
+                responseArea.innerHTML = `<b>الإجابة:</b><br>وعليكم السلام ورحمة الله، بخصوص سؤالك عن "${question}": فإنه بناءً على فتاوى الشيخ ابن عثيمين رحمه الله، الجواب هو...`;
+            }, 1500);
         }
 
         function openPaypal() {
