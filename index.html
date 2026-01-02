@@ -6,88 +6,227 @@
     <title>ابن عثيمين | ذكاء اصطناعي</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        :root { --primary-navy: #0d121d; --card-bg: #161c28; --gold-text: #d4af37; --input-bg: #1e2533; --border-color: #2d3748; }
-        body { background-color: var(--primary-navy); color: white; font-family: sans-serif; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        .header { text-align: center; margin-top: 15px; }
-        .profile-img { width: 100px; height: 100px; border-radius: 50%; border: 2px solid var(--gold-text); margin: 0 auto 10px auto; background-image: url('https://upload.wikimedia.org/wikipedia/ar/c/c2/Muhammad_bin_Salih_al-Uthaymeen.jpg'); background-size: cover; background-position: center; }
-        .ayah { color: var(--gold-text); font-weight: bold; margin: 25px 0; text-align: center; font-size: 1.1rem; }
-        
-        /* تصميم خانة البحث مع زر الإرسال */
-        .search-wrapper {
-            width: 100%; max-width: 400px; display: flex; align-items: center;
-            background-color: var(--input-bg); border: 1px solid var(--border-color);
-            border-radius: 12px; overflow: hidden; padding: 5px;
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --gold-primary: #d4af37;
+            --text-gray: #94a3b8;
         }
-        input { 
-            flex: 1; background: transparent; border: none; padding: 12px; 
-            color: white; text-align: right; font-size: 16px; outline: none; 
-        }
-        .send-btn {
-            background-color: var(--gold-text); color: var(--primary-navy);
-            border: none; border-radius: 8px; width: 45px; height: 45px;
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: transform 0.2s;
-        }
-        .send-btn:active { transform: scale(0.9); }
 
-        #response-area {
-            width: 100%; max-width: 400px; background: var(--card-bg); border-radius: 12px; 
-            margin-top: 20px; padding: 15px; display: none; border-right: 4px solid var(--gold-text);
-            line-height: 1.8; font-size: 15px; text-align: justify; box-sizing: border-box;
+        body {
+            background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
-        .loading { color: var(--gold-text); font-style: italic; font-size: 13px; margin-top: 10px; display: none; }
-        .donation-card { background-color: var(--card-bg); width: 100%; max-width: 400px; padding: 20px; border-radius: 15px; margin-top: 30px; text-align: center; border: 1px solid var(--border-color); box-sizing: border-box; }
-        .pay-button { background-color: #ffc439; color: #003087; display: block; padding: 14px; border-radius: 10px; font-weight: bold; text-decoration: none; cursor: pointer; border: none; width: 100%; font-size: 18px; }
+
+        /* تنسيق الهيدر العلوي */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 20px;
+            gap: 15px;
+        }
+
+        .header-text { text-align: right; }
+        .header-text h2 { margin: 0; font-size: 1.2rem; }
+        .header-text p { margin: 0; color: var(--text-gray); font-size: 0.8rem; }
+
+        .profile-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid var(--gold-primary);
+            background-image: url('https://upload.wikimedia.org/wikipedia/ar/c/c2/Muhammad_bin_Salih_al-Uthaymeen.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .ayah {
+            color: var(--gold-primary);
+            font-weight: bold;
+            margin: 40px 0;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* تنسيق خانة البحث مع الزر الجانبي */
+        .search-wrapper {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+            background-color: rgba(30, 41, 59, 0.7);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 5px;
+            margin-bottom: 40px;
+        }
+
+        .send-btn {
+            background-color: var(--gold-primary);
+            color: #0f172a;
+            border: none;
+            border-radius: 10px;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 12px;
+            color: white;
+            text-align: right;
+            font-size: 15px;
+            outline: none;
+        }
+
+        /* قسم عن المفتي */
+        .info-section {
+            width: 100%;
+            max-width: 400px;
+            text-align: right;
+            margin-bottom: 30px;
+        }
+
+        .info-title {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .info-desc {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* صندوق التبرع */
+        .donation-card {
+            background-color: rgba(30, 41, 59, 0.5);
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid #334155;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .donation-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .donation-subtext {
+            color: var(--text-gray);
+            font-size: 0.75rem;
+            margin-bottom: 15px;
+        }
+
+        .pay-button {
+            background-color: #ffc439;
+            color: #003087;
+            display: block;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: bold;
+            text-decoration: none;
+            border: none;
+            width: 100%;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .privacy-note {
+            font-size: 0.7rem;
+            color: var(--text-gray);
+            line-height: 1.4;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding: 20px 0;
+            color: #475569;
+            font-size: 0.75rem;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
+        <div class="header-text">
+            <h2>محمد بن صالح بن عثيمين</h2>
+            <p>محرك بحث فقهي ذكي</p>
+        </div>
         <div class="profile-img"></div>
-        <h2>محمد بن صالح بن عثيمين</h2>
-        <div style="color: #8892b0; font-size: 14px;">المفتي الرقمي الذكي</div>
     </div>
 
     <div class="ayah">"فَاسْأَلُوا أَهْلَ الذِّكْرِ إِن كُنتُمْ لَا تَعْلَمُونَ"</div>
 
     <div class="search-wrapper">
         <button class="send-btn" onclick="startSearch()">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
         </button>
         <input type="text" id="user-question" placeholder="اكتب سؤالك الشرعي هنا..." onkeypress="if(event.key==='Enter') startSearch()">
     </div>
-    
-    <div id="loading-text" class="loading">جاري البحث في فتاوى الشيخ...</div>
-    <div id="response-area"></div>
+
+    <div class="info-section">
+        <div class="info-title">عن المفتي الرقمي ⓘ</div>
+        <div class="info-desc">
+            منصة وقفية تهدف لإحياء تراث الشيخ ابن عثيمين رحمه اللّٰه باستخدام الذكاء الاصطناعي، لتسهيل وصول الباحثين والعامة إلى الفتاوى الصحيحة.
+        </div>
+    </div>
 
     <div class="donation-card">
-        <div style="font-size: 15px; font-weight: bold; margin-bottom: 10px;">دعم استمرار الوقف 🛡️</div>
+        <div class="donation-header">🛡️ المساهمة في الوقف</div>
+        <div class="donation-subtext">تغطية تكاليف الخوادم ومعالجة الذكاء الاصطناعي</div>
+        
         <button class="pay-button" onclick="openPaypal()">Pay with PayPal</button>
+        
+        <div class="privacy-note">
+            يتم الدفع عبر طرف ثالث مثل باي بال او منصة خاصة في المتاجر الموثوقة لايتم جمع بياناتك او مشاركتها ابدا يتم دفع هذه المبالغ المستلمة لتشغيل الموقع
+        </div>
+    </div>
+
+    <div class="footer">
+        تطوير وإشراف: عبدالفتاح الشوابكة (@abdkb96)
     </div>
 
     <script>
         const tg = window.Telegram.WebApp;
         tg.expand();
 
-        async function startSearch() {
-            const question = document.getElementById('user-question').value;
-            const responseArea = document.getElementById('response-area');
-            const loadingText = document.getElementById('loading-text');
-
-            if (!question) return;
-
-            loadingText.style.display = 'block';
-            responseArea.style.display = 'none';
-
-            // محاكاة البحث (سنربطها لاحقاً بذكاء اصطناعي حقيقي)
-            setTimeout(() => {
-                loadingText.style.display = 'none';
-                responseArea.style.display = 'block';
-                responseArea.innerHTML = `<b>الإجابة:</b><br>وعليكم السلام ورحمة الله، بخصوص سؤالك عن "${question}": فإنه بناءً على فتاوى الشيخ ابن عثيمين رحمه الله، الجواب هو...`;
-            }, 1500);
+        function startSearch() {
+            const q = document.getElementById('user-question').value;
+            if(q) alert("جاري معالجة سؤالك: " + q);
         }
 
         function openPaypal() {
+            // الحفاظ على رابط البايبل الخاص بك
             tg.openLink("https://www.paypal.com/paypalme/AbedAlfattahJafer");
         }
     </script>
