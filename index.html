@@ -25,60 +25,61 @@
             min-height: 100vh;
         }
 
-        /* تنسيق الهيدر العلوي */
+        /* الهيدر مع مسافة علوية مناسبة */
         .header {
             display: flex;
             align-items: center;
             justify-content: flex-end;
             width: 100%;
             max-width: 400px;
-            margin-top: 20px;
+            margin-top: 40px;
             gap: 15px;
         }
 
         .header-text { text-align: right; }
-        .header-text h2 { margin: 0; font-size: 1.2rem; }
-        .header-text p { margin: 0; color: var(--text-gray); font-size: 0.8rem; }
+        .header-text h2 { margin: 0; font-size: 1.25rem; letter-spacing: 0.5px; }
+        .header-text p { margin: 3px 0 0 0; color: var(--text-gray); font-size: 0.85rem; }
 
         .profile-img {
-            width: 70px;
-            height: 70px;
+            width: 75px;
+            height: 75px;
             border-radius: 50%;
             border: 2px solid var(--gold-primary);
             background-image: url('https://upload.wikimedia.org/wikipedia/ar/c/c2/Muhammad_bin_Salih_al-Uthaymeen.jpg');
             background-size: cover;
             background-position: center;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
         }
 
         .ayah {
             color: var(--gold-primary);
             font-weight: bold;
-            margin: 40px 0;
+            margin: 60px 0; /* مسافة كبيرة للجمالية */
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             line-height: 1.6;
         }
 
-        /* تنسيق خانة البحث مع الزر الجانبي */
+        /* حاوية البحث */
         .search-wrapper {
             width: 100%;
             max-width: 400px;
             display: flex;
             align-items: center;
-            background-color: rgba(30, 41, 59, 0.7);
+            background-color: rgba(30, 41, 59, 0.6);
             border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 5px;
-            margin-bottom: 40px;
+            border-radius: 14px;
+            padding: 6px;
+            margin-bottom: 80px; /* مسافة تحت البحث */
         }
 
         .send-btn {
-            background-color: var(--gold-primary);
-            color: #0f172a;
+            background-color: #334155; /* لون داكن للزر كما في الصورة */
+            color: white;
             border: none;
             border-radius: 10px;
-            width: 45px;
-            height: 45px;
+            width: 48px;
+            height: 48px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -89,10 +90,10 @@
             flex: 1;
             background: transparent;
             border: none;
-            padding: 12px;
+            padding: 12px 15px;
             color: white;
             text-align: right;
-            font-size: 15px;
+            font-size: 16px;
             outline: none;
         }
 
@@ -101,31 +102,32 @@
             width: 100%;
             max-width: 400px;
             text-align: right;
-            margin-bottom: 30px;
+            margin-bottom: 50px;
         }
 
         .info-title {
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            gap: 8px;
+            gap: 10px;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 1.05rem;
         }
 
         .info-desc {
             color: var(--text-gray);
-            font-size: 0.9rem;
-            line-height: 1.6;
+            font-size: 0.95rem;
+            line-height: 1.7;
         }
 
-        /* صندوق التبرع */
+        /* صندوق التبرع المطور */
         .donation-card {
-            background-color: rgba(30, 41, 59, 0.5);
+            background-color: rgba(30, 41, 59, 0.4);
             width: 100%;
             max-width: 400px;
-            padding: 20px;
-            border-radius: 20px;
+            padding: 25px;
+            border-radius: 24px;
             border: 1px solid #334155;
             text-align: center;
             box-sizing: border-box;
@@ -137,40 +139,43 @@
             justify-content: center;
             gap: 8px;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-size: 1rem;
         }
 
         .donation-subtext {
             color: var(--text-gray);
-            font-size: 0.75rem;
-            margin-bottom: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
         }
 
         .pay-button {
             background-color: #ffc439;
             color: #003087;
             display: block;
-            padding: 14px;
+            padding: 15px;
             border-radius: 12px;
             font-weight: bold;
             text-decoration: none;
             border: none;
             width: 100%;
             font-size: 1.1rem;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            cursor: pointer;
         }
 
         .privacy-note {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--text-gray);
-            line-height: 1.4;
+            line-height: 1.5;
+            text-align: center;
         }
 
         .footer {
-            margin-top: 40px;
-            padding: 20px 0;
+            margin-top: 60px;
+            padding-bottom: 30px;
             color: #475569;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             text-align: center;
         }
     </style>
@@ -189,13 +194,13 @@
 
     <div class="search-wrapper">
         <button class="send-btn" onclick="startSearch()">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
         </button>
         <input type="text" id="user-question" placeholder="اكتب سؤالك الشرعي هنا..." onkeypress="if(event.key==='Enter') startSearch()">
     </div>
 
     <div class="info-section">
-        <div class="info-title">عن المفتي الرقمي ⓘ</div>
+        <div class="info-title">عن المفتي الرقمي <span style="color:var(--gold-primary)">ⓘ</span></div>
         <div class="info-desc">
             منصة وقفية تهدف لإحياء تراث الشيخ ابن عثيمين رحمه اللّٰه باستخدام الذكاء الاصطناعي، لتسهيل وصول الباحثين والعامة إلى الفتاوى الصحيحة.
         </div>
@@ -219,14 +224,17 @@
     <script>
         const tg = window.Telegram.WebApp;
         tg.expand();
+        tg.ready();
 
         function startSearch() {
             const q = document.getElementById('user-question').value;
-            if(q) alert("جاري معالجة سؤالك: " + q);
+            if(q) {
+                tg.MainButton.setText('جاري البحث...').show();
+                // هنا سيتم ربط الذكاء الاصطناعي لاحقاً
+            }
         }
 
         function openPaypal() {
-            // الحفاظ على رابط البايبل الخاص بك
             tg.openLink("https://www.paypal.com/paypalme/AbedAlfattahJafer");
         }
     </script>
