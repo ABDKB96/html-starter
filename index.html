@@ -1,96 +1,183 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="/_vercel/insights/script.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-    <title>Vercel HTML Starter</title>
-    <meta
-      name="description"
-      content="High-performance HTML based website template."
-    />
-  </head>
-  <body>
-    <h1>Vercel HTML Starter</h1>
-    <p>
-      This template is a simple, but powerful single
-      <code>index.html</code> file deployed to
-      <a href="https://vercel.com">Vercel</a>. When your site is deployed, all
-      static assets (like HTML, JavaScript, CSS, images, and more) are deployed
-      globally to every
-      <a href="https://vercel.com/docs/concepts/edge-network/overview"
-        >Vercel Edge Network</a
-      >
-      region.
-    </p>
-    <h2>Simple, privacy-friendly analytics</h2>
-    <p>
-      Want to understand your visitor traffic? Vercel Analytics gives you
-      first-party, privacy-friendly traffic analytics for your HTML site. This
-      template is already configured using the following script:
-    </p>
-    <pre><code>&lt;script defer src="/_vercel/insights/script.js"&gt;&lt;/script&gt;</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/analytics">Vercel Analytics</a>.
-    </p>
-    <h2>Integrated with git</h2>
-    <p>
-      Deploying updates to your site is as simple as
-      <code>git push</code> thanks to Vercel's advanced
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-      Support for GitHub, GitLab, Bitbucket is zero-configuration, and with the
-      flexible Vercel CLI and API, you can integrate with any tool possible.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-    </p>
-    <h2>Fast <code>gzip</code> compression</h2>
-    <p>
-      To help ensure the smallest possible file sizes for your static assets,
-      the Vercel Edge Network compresses files by default using
-      <code>gzip</code>. You can also optionally use
-      <code>brotli</code> compressesion if you prefer.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/edge-network/compression"
-        >compression</a
-      >.
-    </p>
-    <h2>Advanced routing configuration</h2>
-    <p>
-      Vercel gives you a variety of ways to configure the routing of your
-      website. For example, adding redirects, rewrites, or headers to your page.
-      While you can use <code>vercel.json</code> to define these through JSON,
-      you can also express your routing configuration as code using
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-    <p>
-      Middleware runs before the
-      <a href="https://vercel.com/docs/concepts/edge-network/caching"
-        >Vercel Edge Network Cache</a
-      >, so you can configure routing exactly as your application needs. For
-      example, this template uses <code>middleware.js</code> defined in the root
-      of the repository to add additional security headers to the site:
-    </p>
-    <pre><code>referrer-policy: origin-when-cross-origin
-strict-transport-security: max-age=31536000; includeSubDomains; preload
-x-content-type-options: nosniff
-x-dns-prefetch-control: on
-x-frame-options: DENY</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-  </body>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ابن عثيمين | ذكاء اصطناعي</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        :root {
+            --primary-navy: #0d121d;
+            --card-bg: #161c28;
+            --gold-text: #d4af37;
+            --input-bg: #1e2533;
+            --border-color: #2d3748;
+        }
+
+        body {
+            background-color: var(--primary-navy);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid var(--gold-text);
+            margin: 0 auto 15px auto;
+            background-image: url('https://upload.wikimedia.org/wikipedia/ar/c/c2/Muhammad_bin_Salih_al-Uthaymeen.jpg');
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            margin: 10px 0 5px 0;
+            font-size: 1.4rem;
+        }
+
+        .subtitle {
+            color: #8892b0;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .ayah {
+            color: var(--gold-text);
+            font-weight: bold;
+            margin: 25px 0;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .search-container {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        input {
+            width: 100%;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            border-radius: 12px;
+            color: white;
+            text-align: right;
+            font-size: 16px;
+            outline: none;
+            box-sizing: border-box;
+            transition: border 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--gold-text);
+        }
+
+        .donation-card {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 35px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+        }
+
+        .donation-title {
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .donation-desc {
+            font-size: 12px;
+            color: #8892b0;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .pay-button {
+            background-color: #ffc439;
+            color: #003087;
+            display: block;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            font-size: 18px;
+            transition: transform 0.2s;
+        }
+
+        .pay-button:active {
+            transform: scale(0.98);
+        }
+
+        .footer {
+            margin-top: auto;
+            padding: 20px 0;
+            color: #4a5568;
+            font-size: 11px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="profile-img"></div>
+        <h2>محمد بن صالح بن عثيمين</h2>
+        <div class="subtitle">محرك بحث فقهي ذكي</div>
+    </div>
+
+    <div class="ayah">"فَاسْأَلُوا أَهْلَ الذِّكْرِ إِن كُنتُمْ لَا تَعْلَمُونَ"</div>
+
+    <div class="search-container">
+        <input type="text" placeholder="اكتب سؤالك الشرعي هنا...">
+    </div>
+
+    <div class="donation-card">
+        <div class="donation-title">المساهمة في الوقف 🛡️</div>
+        <div class="donation-desc">ساهم في استمرار المشروع وتغطية تكاليف الخوادم ومعالجة الذكاء الاصطناعي</div>
+        <button class="pay-button" onclick="openPaypal()">Pay with PayPal</button>
+    </div>
+
+    <div class="footer">
+        تطوير وإشراف: عَبْدُ الفَتَّاحِ الشَّوابكة
+    </div>
+
+    <script>
+        // تفعيل خصائص تليجرام
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // فتح التطبيق بكامل الشاشة
+        tg.ready();
+
+        function openPaypal() {
+            // الرابط الخاص بك الذي يعمل داخل التليجرام
+            const paypalUrl = "https://www.paypal.com/paypalme/AbedAlfattahJafer";
+            tg.openLink(paypalUrl);
+        }
+    </script>
+</body>
 </html>
