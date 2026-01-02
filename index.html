@@ -73,12 +73,10 @@
             loading.style.display = 'block';
             responseArea.style.display = 'none';
 
-            try {
-                // تم تعديل الرابط ليكون نسخة واحدة فقط من https وبدون أخطاء
+                       try {
                 const response = await fetch("https://uthaymeen-ai.jok720er.workers.dev/", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ question: input.value })
                 });
                 const data = await response.json();
                 loading.style.display = 'none';
